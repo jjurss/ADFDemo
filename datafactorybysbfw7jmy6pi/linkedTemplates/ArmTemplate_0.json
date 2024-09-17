@@ -1,0 +1,820 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "datafactorybysbfw7jmy6pi"
+		},
+		"ArmtemplateStorageLinkedService_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ArmtemplateStorageLinkedService'"
+		},
+		"EmployeeData_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'EmployeeData'"
+		},
+		"EmployeeOutput_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'EmployeeOutput'"
+		},
+		"JaredExternal_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'JaredExternal'"
+		},
+		"JaredInternal_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'JaredInternal'"
+		},
+		"MovieDataTransform_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'MovieDataTransform'"
+		},
+		"MovieDestination_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'MovieDestination'"
+		},
+		"MovieSource_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'MovieSource'"
+		},
+		"jaredproduction_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'jaredproduction'"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/ArmtemplateStorageLinkedService')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('ArmtemplateStorageLinkedService_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/EmployeeData')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('EmployeeData_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/EmployeeOutput')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('EmployeeOutput_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/JaredExternal')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('JaredExternal_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/JaredInternal')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('JaredInternal_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/MovieDataTransform')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('MovieDataTransform_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/MovieDestination')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('MovieDestination_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/MovieSource')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('MovieSource_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/jaredproduction')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('jaredproduction_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Binary1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "JaredExternal",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "data"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/JaredExternal')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DelimitedText1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "JaredInternal",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "data"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/JaredInternal')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DelimitedText2')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "JaredExternal",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "Accidents_2015.csv",
+						"container": "data"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Accident_Index",
+						"type": "String"
+					},
+					{
+						"name": "Location_Easting_OSGR",
+						"type": "String"
+					},
+					{
+						"name": "Location_Northing_OSGR",
+						"type": "String"
+					},
+					{
+						"name": "Longitude",
+						"type": "String"
+					},
+					{
+						"name": "Latitude",
+						"type": "String"
+					},
+					{
+						"name": "Police_Force",
+						"type": "String"
+					},
+					{
+						"name": "Accident_Severity",
+						"type": "String"
+					},
+					{
+						"name": "Number_of_Vehicles",
+						"type": "String"
+					},
+					{
+						"name": "Number_of_Casualties",
+						"type": "String"
+					},
+					{
+						"name": "Date",
+						"type": "String"
+					},
+					{
+						"name": "Day_of_Week",
+						"type": "String"
+					},
+					{
+						"name": "Time",
+						"type": "String"
+					},
+					{
+						"name": "Local_Authority_(District)",
+						"type": "String"
+					},
+					{
+						"name": "Local_Authority_(Highway)",
+						"type": "String"
+					},
+					{
+						"name": "1st_Road_Class",
+						"type": "String"
+					},
+					{
+						"name": "1st_Road_Number",
+						"type": "String"
+					},
+					{
+						"name": "Road_Type",
+						"type": "String"
+					},
+					{
+						"name": "Speed_limit",
+						"type": "String"
+					},
+					{
+						"name": "Junction_Detail",
+						"type": "String"
+					},
+					{
+						"name": "Junction_Control",
+						"type": "String"
+					},
+					{
+						"name": "2nd_Road_Class",
+						"type": "String"
+					},
+					{
+						"name": "2nd_Road_Number",
+						"type": "String"
+					},
+					{
+						"name": "Pedestrian_Crossing-Human_Control",
+						"type": "String"
+					},
+					{
+						"name": "Pedestrian_Crossing-Physical_Facilities",
+						"type": "String"
+					},
+					{
+						"name": "Light_Conditions",
+						"type": "String"
+					},
+					{
+						"name": "Weather_Conditions",
+						"type": "String"
+					},
+					{
+						"name": "Road_Surface_Conditions",
+						"type": "String"
+					},
+					{
+						"name": "Special_Conditions_at_Site",
+						"type": "String"
+					},
+					{
+						"name": "Carriageway_Hazards",
+						"type": "String"
+					},
+					{
+						"name": "Urban_or_Rural_Area",
+						"type": "String"
+					},
+					{
+						"name": "Did_Police_Officer_Attend_Scene_of_Accident",
+						"type": "String"
+					},
+					{
+						"name": "LSOA_of_Accident_Location",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/JaredExternal')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DelimitedText3')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "jaredproduction",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "data"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/jaredproduction')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DelimitedText4')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "JaredExternal",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "Accidents_2015.csv",
+						"container": "data"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Accident_Index",
+						"type": "String"
+					},
+					{
+						"name": "Location_Easting_OSGR",
+						"type": "String"
+					},
+					{
+						"name": "Location_Northing_OSGR",
+						"type": "String"
+					},
+					{
+						"name": "Longitude",
+						"type": "String"
+					},
+					{
+						"name": "Latitude",
+						"type": "String"
+					},
+					{
+						"name": "Police_Force",
+						"type": "String"
+					},
+					{
+						"name": "Accident_Severity",
+						"type": "String"
+					},
+					{
+						"name": "Number_of_Vehicles",
+						"type": "String"
+					},
+					{
+						"name": "Number_of_Casualties",
+						"type": "String"
+					},
+					{
+						"name": "Date",
+						"type": "String"
+					},
+					{
+						"name": "Day_of_Week",
+						"type": "String"
+					},
+					{
+						"name": "Time",
+						"type": "String"
+					},
+					{
+						"name": "Local_Authority_(District)",
+						"type": "String"
+					},
+					{
+						"name": "Local_Authority_(Highway)",
+						"type": "String"
+					},
+					{
+						"name": "1st_Road_Class",
+						"type": "String"
+					},
+					{
+						"name": "1st_Road_Number",
+						"type": "String"
+					},
+					{
+						"name": "Road_Type",
+						"type": "String"
+					},
+					{
+						"name": "Speed_limit",
+						"type": "String"
+					},
+					{
+						"name": "Junction_Detail",
+						"type": "String"
+					},
+					{
+						"name": "Junction_Control",
+						"type": "String"
+					},
+					{
+						"name": "2nd_Road_Class",
+						"type": "String"
+					},
+					{
+						"name": "2nd_Road_Number",
+						"type": "String"
+					},
+					{
+						"name": "Pedestrian_Crossing-Human_Control",
+						"type": "String"
+					},
+					{
+						"name": "Pedestrian_Crossing-Physical_Facilities",
+						"type": "String"
+					},
+					{
+						"name": "Light_Conditions",
+						"type": "String"
+					},
+					{
+						"name": "Weather_Conditions",
+						"type": "String"
+					},
+					{
+						"name": "Road_Surface_Conditions",
+						"type": "String"
+					},
+					{
+						"name": "Special_Conditions_at_Site",
+						"type": "String"
+					},
+					{
+						"name": "Carriageway_Hazards",
+						"type": "String"
+					},
+					{
+						"name": "Urban_or_Rural_Area",
+						"type": "String"
+					},
+					{
+						"name": "Did_Police_Officer_Attend_Scene_of_Accident",
+						"type": "String"
+					},
+					{
+						"name": "LSOA_of_Accident_Location",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/JaredExternal')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/EmployeeInfo')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "EmployeeData",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "EmployeeDemo"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "EmployeeInfo.csv",
+						"container": "empstore"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "EmployeeId",
+						"type": "String"
+					},
+					{
+						"name": "FirstName",
+						"type": "String"
+					},
+					{
+						"name": "LastName",
+						"type": "String"
+					},
+					{
+						"name": "City",
+						"type": "String"
+					},
+					{
+						"name": "ZIP",
+						"type": "String"
+					},
+					{
+						"name": "Email",
+						"type": "String"
+					},
+					{
+						"name": "State",
+						"type": "String"
+					},
+					{
+						"name": "DateOfJoining",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/EmployeeData')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/EmployeeSalary')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "EmployeeData",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "EmployeeDemo"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "EmployeeSalary.csv",
+						"container": "empstore"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "EmployeeId",
+						"type": "String"
+					},
+					{
+						"name": "BasePay",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/EmployeeData')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/EmployeeSink')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "EmployeeOutput",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "EmployeeDemo"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "output",
+						"container": "empstore"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": false,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/EmployeeOutput')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/EmployeeSalaryDemo')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "WranglingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"name": "EmployeeInfo",
+							"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> EmployeeInfo",
+							"dataset": {
+								"referenceName": "EmployeeInfo",
+								"type": "DatasetReference"
+							}
+						},
+						{
+							"name": "EmployeeSalary",
+							"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> EmployeeSalary",
+							"dataset": {
+								"referenceName": "EmployeeSalary",
+								"type": "DatasetReference"
+							}
+						}
+					],
+					"script": "section Section1;\r\nshared EmployeeInfo = let AdfDoc = AzureStorage.BlobContents(\"https://jaredadl73.blob.core.windows.net/empstore/EmployeeInfo.csv\"),Csv = Csv.Document(AdfDoc, [Delimiter = \",\", Encoding = TextEncoding.Utf8, QuoteStyle = QuoteStyle.Csv]), PromotedHeaders = Table.PromoteHeaders(Csv, [PromoteAllScalars = true]) in  PromotedHeaders;\r\nshared EmployeeSalary = let AdfDoc = AzureStorage.BlobContents(\"https://jaredadl73.blob.core.windows.net/empstore/EmployeeSalary.csv\"),Csv = Csv.Document(AdfDoc, [Delimiter = \",\", Encoding = TextEncoding.Utf8, QuoteStyle = QuoteStyle.Csv]), PromotedHeaders = Table.PromoteHeaders(Csv, [PromoteAllScalars = true]) in  PromotedHeaders;\r\nshared UserQuery = let\r\n  Source = EmployeeInfo,\r\n  JoinTransformation = Table.NestedJoin(Source, {\"EmployeeId\"}, EmployeeSalary, {\"EmployeeId\"}, \"EmployeeSalary\", JoinKind.Inner),\r\n  ExpandColumns = Table.ExpandTableColumn(JoinTransformation, \"EmployeeSalary\", {\"BasePay\"}, {\"EmployeeSalary.BasePay\"}),\r\n  RemoveColumns = Table.RemoveColumns(ExpandColumns, {\"EmployeeId\", \"FirstName\", \"LastName\", \"ZIP\", \"State\", \"DateOfJoining\"}),\r\n  ReplacedQuotes = Table.ReplaceValue(RemoveColumns, \"\"\"\", \"\", Replacer.ReplaceText, {\"City\", \"Email\"}),\r\n  #\"Inserted conditional column\" = Table.AddColumn(ReplacedQuotes, \"SanitizedEmail\", each if not Text.Contains([Email], \"@\") then \"\" else if not Text.Contains([Email], \".\") then \"\" else [Email]),\r\n  RemoveEmailColumn = Table.RemoveColumns(#\"Inserted conditional column\", {\"Email\"}),\r\n  ConvertIdToNumber = Table.TransformColumnTypes(RemoveEmailColumn, {{\"EmployeeSalary.BasePay\", type number}}),\r\n  RemoveRowsWithEmptyEmail = Table.SelectRows(ConvertIdToNumber, each [SanitizedEmail] <> null and [SanitizedEmail] <> \"\"),\r\n  AverageSalaryByCity = Table.Group(RemoveRowsWithEmptyEmail, {\"City\"}, {{\"AverageSalary\", each List.Average([EmployeeSalary.BasePay]), type number}}),\r\n  #\"Filtered rows\" = Table.SelectRows(AverageSalaryByCity, each [AverageSalary] <> null and [AverageSalary] <= 200000)\r\nin\r\n  #\"Filtered rows\";\r\n",
+					"documentLocale": "en-us"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/EmployeeInfo')]",
+				"[concat(variables('factoryId'), '/datasets/EmployeeSalary')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/powerquery1')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "WranglingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"name": "DelimitedText2",
+							"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> DelimitedText2",
+							"dataset": {
+								"referenceName": "DelimitedText2",
+								"type": "DatasetReference"
+							}
+						}
+					],
+					"script": "section Section1;\r\nshared DelimitedText2 = let AdfDoc = AzureStorage.BlobContents(\"https://jaredexternal163.blob.core.windows.net/data/Accidents_2015.csv\"),Csv = Csv.Document(AdfDoc, [Delimiter = \",\", Encoding = TextEncoding.Utf8, QuoteStyle = QuoteStyle.Csv]), PromotedHeaders = Table.PromoteHeaders(Csv, [PromoteAllScalars = true]) in  PromotedHeaders;\r\nshared UserQuery = let Source = #\"DelimitedText2\",\r\n  #\"Renamed columns\" = Table.RenameColumns(Source, {{\"Accident_Index\", \"Accident_ID\"}}) in #\"Renamed columns\";\r\n",
+					"documentLocale": "en-us"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/DelimitedText2')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/EmployeeDemo')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Calculate average salary from employee data using Power Query",
+				"activities": [
+					{
+						"name": "AverageEmployeeSalary",
+						"description": "Calculate average salary from employee data",
+						"type": "ExecuteWranglingDataflow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "EmployeeSalaryDemo",
+								"type": "DataFlowReference",
+								"datasetParameters": {
+									"EmployeeInfo": {},
+									"EmployeeSalary": {},
+									"EmployeeSink": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"queries": [
+								{
+									"queryName": "UserQuery",
+									"dataflowSinks": [
+										{
+											"name": "EmployeeSink",
+											"dataset": {
+												"referenceName": "EmployeeSink",
+												"type": "DatasetReference",
+												"parameters": {}
+											},
+											"script": "sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['SanitizedEmployeeData'],\n\ttruncate: true) ~> EmployeeSink"
+										}
+									]
+								}
+							]
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"folder": {
+					"name": "EmployeeDemo"
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/EmployeeSalaryDemo')]",
+				"[concat(variables('factoryId'), '/datasets/EmployeeSink')]"
+			]
+		}
+	]
+}

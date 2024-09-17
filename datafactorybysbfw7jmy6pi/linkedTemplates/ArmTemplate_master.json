@@ -1,0 +1,125 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "datafactorybysbfw7jmy6pi"
+		},
+		"ArmtemplateStorageLinkedService_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ArmtemplateStorageLinkedService'"
+		},
+		"EmployeeData_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'EmployeeData'"
+		},
+		"EmployeeOutput_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'EmployeeOutput'"
+		},
+		"JaredExternal_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'JaredExternal'"
+		},
+		"JaredInternal_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'JaredInternal'"
+		},
+		"MovieDataTransform_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'MovieDataTransform'"
+		},
+		"MovieDestination_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'MovieDestination'"
+		},
+		"MovieSource_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'MovieSource'"
+		},
+		"jaredproduction_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'jaredproduction'"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "datafactorybysbfw7jmy6pi_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"ArmtemplateStorageLinkedService_connectionString": {
+						"value": "[parameters('ArmtemplateStorageLinkedService_connectionString')]"
+					},
+					"EmployeeData_connectionString": {
+						"value": "[parameters('EmployeeData_connectionString')]"
+					},
+					"EmployeeOutput_connectionString": {
+						"value": "[parameters('EmployeeOutput_connectionString')]"
+					},
+					"JaredExternal_connectionString": {
+						"value": "[parameters('JaredExternal_connectionString')]"
+					},
+					"JaredInternal_connectionString": {
+						"value": "[parameters('JaredInternal_connectionString')]"
+					},
+					"MovieDataTransform_connectionString": {
+						"value": "[parameters('MovieDataTransform_connectionString')]"
+					},
+					"MovieDestination_connectionString": {
+						"value": "[parameters('MovieDestination_connectionString')]"
+					},
+					"MovieSource_connectionString": {
+						"value": "[parameters('MovieSource_connectionString')]"
+					},
+					"jaredproduction_connectionString": {
+						"value": "[parameters('jaredproduction_connectionString')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "datafactorybysbfw7jmy6pi_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'datafactorybysbfw7jmy6pi_ArmTemplate_0')]"
+			]
+		}
+	]
+}

@@ -1,0 +1,42 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "datafactorybysbfw7jmy6pi"
+		},
+		"ArmtemplateStorageLinkedService_connectionString": {
+			"value": ""
+		},
+		"EmployeeData_connectionString": {
+			"value": ""
+		},
+		"EmployeeOutput_connectionString": {
+			"value": ""
+		},
+		"JaredExternal_connectionString": {
+			"value": ""
+		},
+		"JaredInternal_connectionString": {
+			"value": ""
+		},
+		"MovieDataTransform_connectionString": {
+			"value": ""
+		},
+		"MovieDestination_connectionString": {
+			"value": ""
+		},
+		"MovieSource_connectionString": {
+			"value": ""
+		},
+		"jaredproduction_connectionString": {
+			"value": ""
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
